@@ -5,11 +5,18 @@
 
 # import statements
 from scapy.all import *
+import os
 
 
 def list_pcap_files():
     """Return a list of all files of type .pcap
     """
+    pcap_list = []
+    for root, dirs, files in os.walk("./pcap_files"):
+        for file in files:
+            if file.endswith(".pcap"):
+                pcap_list.append(file)
+    print(pcap_list)
 
 def select_pcap_file():
     """Select one of the listed files
@@ -37,3 +44,5 @@ packets = rdpcap(PCAP_FILE, COUNT)
 
 for p in packets:
     print(p.summary())
+
+list_pcap_files()
