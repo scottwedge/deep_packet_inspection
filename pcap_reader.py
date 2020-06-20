@@ -18,9 +18,8 @@ def list_pcap_files():
                 pcap_list.append(file)
     return pcap_list
 
-def select_pcap_file(list):
-    """Select one of the listed files
-       Default to DEFAULT_FILE
+def display_pcap_files(list):
+    """Display the files in the list
     """
     length = len(list)
     print("There are ", length," files to choose from in: ", list)
@@ -29,6 +28,13 @@ def select_pcap_file(list):
     while l < length:
         print(l+1,":", list[l])
         l = l + 1
+
+def select_pcap_file(list):
+    """Select one of the listed files
+       Default to DEFAULT_FILE
+    """
+    choice = input("Enter a number from list above to select the file: ")
+    return choice
 
 
 def list_packet_types():
@@ -53,5 +59,7 @@ for p in packets:
     print(p.summary())
 
 list = list_pcap_files()
+
+display_pcap_files(list)
 
 select_pcap_file(list)
