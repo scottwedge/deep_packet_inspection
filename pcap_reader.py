@@ -29,11 +29,20 @@ def display_pcap_files(list):
         print(l+1,":", list[l])
         l = l + 1
 
-def select_pcap_file(list):
+    return length
+
+def select_pcap_file(length):
     """Select one of the listed files
        Default to DEFAULT_FILE
     """
-    choice = input("Enter a number from list above to select the file: ")
+    choice = 0
+
+    while choice not in range(1, length+1):
+        choice = input("Enter a number from list above to select the file: ")
+        choice = int(choice)
+    # need to add range and type checking        
+
+    print("Selected:", choice)
     return choice
 
 
@@ -60,6 +69,6 @@ for p in packets:
 
 list = list_pcap_files()
 
-display_pcap_files(list)
+length = display_pcap_files(list)
 
-select_pcap_file(list)
+select_pcap_file(length)
