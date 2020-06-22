@@ -11,30 +11,33 @@ import os
 def list_pcap_files():
     """Return a list of all files of type .pcap
     """
+    global pcap_list 
     pcap_list = []
     for root, dirs, files in os.walk("./pcap_files"):
         for file in files:
             if file.endswith(".pcap"):
                 pcap_list.append(file)
-    return pcap_list
 
-def display_pcap_files(list):
+def display_pcap_files():
     """Display the files in the list
     """
-    length = len(list)
-    print("There are ", length," files to choose from in: ", list)
+    global length 
+    length = len(pcap_list)
+    print("There are ", length," files to choose from in: ", pcap_list)
 
     l = 0
     while l < length:
-        print(l+1,":", list[l])
+        print(l+1,":", pcap_list[l])
         l = l + 1
 
-    return length
 
-def select_pcap_file(length):
+def select_pcap_file():
     """Select one of the listed files
-       Default to DEFAULT_FILE
+       Default to first file
     """
+    global choice 
+    global default
+    default = 1
     choice = 0
 
     while choice not in range(1, length+1):
@@ -43,7 +46,6 @@ def select_pcap_file(length):
     # need to add range and type checking        
 
     print("Selected:", choice)
-    return choice
 
 
 def list_packet_types():
@@ -67,8 +69,8 @@ packets = rdpcap(PCAP_FILE, COUNT)
 for p in packets:
     print(p.summary())
 
-list = list_pcap_files()
+list_pcap_files()
 
-length = display_pcap_files(list)
+display_pcap_files()
 
-select_pcap_file(length)
+select_pcap_file()
