@@ -45,7 +45,7 @@ def select_pcap_file():
         choice = int(choice)
     # need to add range and type checking        
 
-    print("Selected:", choice)
+    print("Selected:", choice, pcap_list[choice - 1])
 
 
 def list_packet_types():
