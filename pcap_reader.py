@@ -37,6 +37,7 @@ def select_pcap_file():
     """
     global choice 
     global default
+    global selection
     default = 1
     choice = 0
 
@@ -46,10 +47,12 @@ def select_pcap_file():
     # need to add range and type checking        
 
     print("Selected:", choice, pcap_list[choice - 1])
+    selection = pcap_list[choice - 1]
 
 
 def list_packet_types():
     """Return list of packet types in the pcap file
+       IPv4, IPv6, TCP, UDP, ICMP or ARP or ???
     """
 
 def select_packet_type():
@@ -59,12 +62,13 @@ def select_packet_type():
 
 
 # set default PCAP file to "pcap_files/pings.pcap"
-PCAP_FILE = "pcap_files/pings.pcap"
+PCAP_FILE1 = "pcap_files/pings.pcap"
+PCAP_FILE2 = "pcap_files/grab_all.pcap"
 
 # set default to read all packets in file
 COUNT = -1
 
-packets = rdpcap(PCAP_FILE, COUNT)
+packets = rdpcap(PCAP_FILE2, COUNT)
 
 for p in packets:
     print(p.summary())
